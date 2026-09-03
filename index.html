@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lazo</title>
+  <meta name="description"
+    content="Practica cómo manejar conflictos escolares conversando con un personaje y recibiendo retroalimentación desde diálogo, mediación y escucha activa." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind (Play CDN): sin paso de build -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#F5F1E4",
+            surface: "#FFFFFF",
+            ink: "#21302A",
+            "ink-soft": "#55655C",
+            line: "#DCD3B9",
+
+            jade: "#2F6E5B", "jade-soft": "#E3EEE8",
+            gold: "#A8763A", "gold-soft": "#F1E6CE",
+            slate: "#48626B", "slate-soft": "#E4EBEC",
+            moss: "#6B7A3E", "moss-soft": "#E9EDDD",
+            teal: "#2E7E82", "teal-soft": "#DFEDEE",
+            indigo: "#4A5A8A", "indigo-soft": "#E4E7F1",
+            plum: "#6B4A6B", "plum-soft": "#EFE3EF",
+            clay: "#8A5A3E", "clay-soft": "#F0E3D6",
+            berry: "#8A3E5A", "berry-soft": "#F1DEE7",
+            olive: "#7A7A3E", "olive-soft": "#EFEFDA",
+            alert: "#A8472A", "alert-soft": "#F5E1D6"
+          },
+          fontFamily: {
+            display: ["Fraunces", "Georgia", "serif"],
+            body: ["Inter", "-apple-system", "Segoe UI", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-bg text-ink font-body leading-[1.55] antialiased">
+
+  <!-- Contenedor con dos columnas: app a la izquierda, chatbot a la derecha -->
+  <div class="flex flex-col md:flex-row max-w-[1280px] mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-20 gap-6">
+    <!-- App principal (izquierda) -->
+    <div id="app" class="flex-1 min-w-0"></div>
+
+    <!-- Chatbot lateral (derecha) -->
+    <aside id="chatbot-sidebar" class="w-full md:w-[280px] shrink-0 hidden md:block">
+      <!-- El contenido lo genera chatbot.js -->
+    </aside>
+  </div>
+
+  <!-- Overlay de modales (sin cambios) -->
+  <div id="modal-overlay" class="fixed inset-0 bg-[rgba(33,48,42,0.45)] items-center justify-center p-4 z-50 hidden">
+    <div id="modal-panel" class="bg-surface max-w-[460px] w-full p-6 rounded relative max-h-[80vh] overflow-y-auto">
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
