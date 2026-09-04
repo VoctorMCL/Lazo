@@ -1,10 +1,3 @@
-/* ============================================================
-   PROGRESO (localStorage)
-   ------------------------------------------------------------
-   Guarda el progreso únicamente en este navegador/dispositivo,
-   igual que se explica en el modal de privacidad de la app.
-   ============================================================ */
-
 const KEY = "lazo:progreso";
 
 export function getProgress() {

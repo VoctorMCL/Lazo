@@ -1,13 +1,5 @@
-/* ============================================================
-   CONTROLADOR DE IA / Conexión con la API de Gemini
-   ============================================================ */
-
-// Reemplaza esta clave con una nueva válida desde AI Studio
 const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY";
 
-// ------------------------------------------------------------------
-// 1. Función para el simulador de diálogo (juego de rol)
-// ------------------------------------------------------------------
 export async function getAIResponse(scenario, messages) {
     try {
         const systemInstruction = `
@@ -45,7 +37,6 @@ No incluyas feedback antes de alcanzar ese mínimo de intercambios. La retroalim
 
         if (data.error) {
             console.error("Error de Gemini (simulador):", data.error);
-            // Devolvemos un mensaje de error sin emojis
             if (data.error.code === 429) {
                 return { reply: "[Error] El servicio de IA ha agotado sus créditos. Contacta al administrador.", feedback: null };
             } else if (data.error.code === 403) {
@@ -74,9 +65,6 @@ No incluyas feedback antes de alcanzar ese mínimo de intercambios. La retroalim
     }
 }
 
-// ------------------------------------------------------------------
-// 2. Función para el chatbot lateral (asistente general)
-// ------------------------------------------------------------------
 export async function getChatbotResponse(messages) {
     try {
         const systemInstruction = `
@@ -89,7 +77,6 @@ Si el usuario formula una pregunta sobre cualquier tema ajeno a este ámbito (po
 No proporciones información fuera de tu campo de especialización. Mantén un tono neutral, empático y didáctico. Tus respuestas deben ser breves, claras y orientadas a la acción.
 `;
 
-        // Solo los últimos 3 mensajes para ahorrar tokens
         const recent = messages.slice(-3);
         const contents = recent.map(m => ({
             role: m.sender === 'user' ? 'user' : 'model',
