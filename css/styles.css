@@ -179,56 +179,20 @@
   }
 }
 
-.root-l1,
-.root-l2,
-.root-r1,
-.root-r2 {
+.root-path {
   transform-box: fill-box;
   transform-origin: 50% 0%;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
+  animation:
+    rootDraw var(--draw-dur, 2.6s) ease-out var(--draw-delay, .1s) forwards,
+    rootSway var(--sway-dur, 10s) ease-in-out infinite var(--sway-delay, 2s),
+    rootDrift var(--drift-dur, 14s) ease-in-out infinite var(--sway-delay, 2s);
 }
 
-.root-l1 {
-  animation: rootDraw 2.6s ease-out .1s forwards, rootSway 8s ease-in-out infinite 2.7s, rootDrift 12s ease-in-out infinite 2.7s;
-}
-
-.root-l2 {
-  animation: rootDraw 2.9s ease-out .5s forwards, rootSway 11s ease-in-out infinite 3.4s, rootDrift 16s ease-in-out infinite 3.4s;
-}
-
-.root-r1 {
-  animation: rootDraw 2.8s ease-out .25s forwards, rootSway 9s ease-in-out infinite 3.05s, rootDrift 13s ease-in-out infinite 3.05s;
-}
-
-.root-r2 {
-  animation: rootDraw 2.2s ease-out .65s forwards, rootSway 12s ease-in-out infinite 2.85s, rootDrift 17s ease-in-out infinite 2.85s;
-}
-
-.root-hair-l,
-.root-hair-r {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  opacity: 0;
-  animation: hairFadeIn 1.4s ease-out 1.6s forwards;
-}
-
-.root-hair-l {
-  animation: hairFadeIn 1.4s ease-out 1.6s forwards, rootSway 13s ease-in-out infinite 3.6s, rootDrift 18s ease-in-out infinite 3.6s;
-}
-
-.root-hair-r {
-  animation: hairFadeIn 1.4s ease-out 1.9s forwards, rootSway 14.5s ease-in-out infinite 4.3s, rootDrift 19s ease-in-out infinite 4.3s;
-}
-
-@keyframes hairFadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: var(--hair-opacity, .22);
-  }
+.root-path--static {
+  animation: none;
+  stroke-dashoffset: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -237,27 +201,14 @@
   .animate-shake,
   .dot-bounce,
   .thread-draw,
-  .root-l1,
-  .root-l2,
-  .root-r1,
-  .root-r2,
-  .root-hair-l,
-  .root-hair-r,
+  .root-path,
   #chatbot-sidebar,
   #chatbot-backdrop {
     animation: none !important;
     transition: none !important;
   }
 
-  .root-l1,
-  .root-l2,
-  .root-r1,
-  .root-r2 {
+  .root-path {
     stroke-dashoffset: 0 !important;
-  }
-
-  .root-hair-l,
-  .root-hair-r {
-    opacity: var(--hair-opacity, .16) !important;
   }
 }
