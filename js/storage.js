@@ -1,6 +1,25 @@
 const KEY = "lazo:progreso";
 
+function storageIsAvailable() {
+  try {
+    const testKey = "__lazo_test__";
+    localStorage.setItem(testKey, "1");
+    localStorage.removeItem(testKey);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+const hasStorage = storageIsAvailable();
+let memoryFallback = {};
+
+if (!hasStorage) {
+  console.warn("localStorage no está disponible en este navegador: el progreso no se guardará entre sesiones.");
+}
+
 export function getProgress() {
+  if (!hasStorage) return memoryFallback;
   try {
     const raw = localStorage.getItem(KEY);
     return raw ? JSON.parse(raw) : {};
@@ -11,6 +30,10 @@ export function getProgress() {
 }
 
 export function saveProgress(progress) {
+  if (!hasStorage) {
+    memoryFallback = progress;
+    return false;
+  }
   try {
     localStorage.setItem(KEY, JSON.stringify(progress));
     return true;
@@ -21,5 +44,6 @@ export function saveProgress(progress) {
 }
 
 export function resetProgress() {
+  memoryFallback = {};
   return saveProgress({});
 }
