@@ -1,4 +1,4 @@
-const GEMINI_API_KEY = "AQ.Ab8RN6JTcTI6d2ub1d9xXr3SExdVAVyUTog0Mpp5GR8u1BoLKw";
+const PROXY_BASE_URL = "https://lazo.cordobavictorml.workers.dev";
 
 export async function getAIResponse(scenario, messages) {
     try {
