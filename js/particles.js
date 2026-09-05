@@ -1,12 +1,9 @@
-// Fondo de partículas flotantes (tipo polvo/polen) — vanilla JS, sin frameworks.
-// Ligero, respeta prefers-reduced-motion y se pausa cuando la pestaña no está visible.
-
 (function () {
   const canvas = document.getElementById("bg-particles");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
 
-  const PALETTE = ["#2F6E5B", "#A8763A", "#2E7E82", "#6B4A6B", "#8A5A3E"]; // jade, gold, teal, plum, clay
+  const PALETTE = ["#2F6E5B", "#A8763A", "#2E7E82", "#6B4A6B", "#8A5A3E"];
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -34,7 +31,6 @@
 
   function densityFor(w, h) {
     const area = w * h;
-    // ~1 partícula por cada 26000px², con límites razonables para no saturar
     return Math.max(18, Math.min(70, Math.round(area / 26000)));
   }
 
@@ -46,9 +42,9 @@
       r: rand(1, 2.6),
       color,
       baseAlpha: rand(0.12, 0.4),
-      speed: rand(6, 16),           // px/seg hacia arriba
-      driftAmp: rand(8, 28),        // amplitud del vaivén horizontal
-      driftSpeed: rand(0.15, 0.4),  // velocidad del vaivén
+      speed: rand(6, 16),
+      driftAmp: rand(8, 28),
+      driftSpeed: rand(0.15, 0.4),
       phase: rand(0, Math.PI * 2),
       baseX: 0
     };
@@ -81,7 +77,6 @@
   }
 
   function drawStatic() {
-    // Modo sin animación: una sola pasada, sin loop.
     ctx.clearRect(0, 0, width, height);
     particles.forEach(p => {
       ctx.beginPath();
