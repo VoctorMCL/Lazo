@@ -69,56 +69,13 @@
 
   <div data-depth="6" class="hidden xl:block fixed left-0 top-0 h-screen w-40 -z-10 pointer-events-none overflow-hidden"
     aria-hidden="true">
-    <svg id="roots-left" viewBox="0 0 140 900" preserveAspectRatio="xMidYMin slice" class="w-full h-full">
-      <path class="root-l1" pathLength="100"
-        d="M60 -20 C 28 80, 78 150, 46 260 C 20 350, 66 430, 38 540 C 16 610, 54 680, 30 780 C 14 830, 42 860, 24 900 M46 260 C 76 272, 96 304, 80 338 M30 780 C 4 792, -8 820, 6 850"
-        fill="none" stroke="#2F6E5B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.32" />
-      <path class="root-l2" pathLength="100"
-        d="M20 -20 C 50 100, 6 190, 30 300 C 50 390, 4 470, 26 580 C 40 650, 10 710, 28 800 M30 300 C 4 312, -10 340, 2 372"
-        fill="none" stroke="#2E7E82" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.2" />
-      <path class="root-hair-l" pathLength="100" style="--hair-opacity:.16"
-        d="M92 30 C 78 120, 106 200, 82 300 C 66 370, 94 440, 74 520" fill="none" stroke="#2F6E5B" stroke-width="0.6"
-        stroke-linecap="round" stroke-dasharray="1 5" />
-    </svg>
+    <svg id="roots-left" viewBox="0 0 140 900" preserveAspectRatio="xMidYMin slice" class="w-full h-full"></svg>
   </div>
   <div data-depth="6"
     class="hidden xl:block fixed right-0 top-0 h-screen w-40 -z-10 pointer-events-none overflow-hidden"
     aria-hidden="true">
-    <svg id="roots-right" viewBox="0 0 140 900" preserveAspectRatio="xMidYMin slice" class="w-full h-full">
-      <path class="root-r1" pathLength="100"
-        d="M38 -20 C 92 60, 18 145, 68 230 C 110 300, 26 385, 74 470 C 108 530, 40 610, 82 700 C 100 750, 66 800, 90 860 M68 230 C 40 244, 22 272, 36 302 M82 700 C 108 712, 122 742, 106 772"
-        fill="none" stroke="#6B4A6B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.3" />
-      <path class="root-r2" pathLength="100"
-        d="M102 -20 C 76 50, 116 110, 92 180 C 70 240, 108 300, 86 370 C 68 420, 100 480, 82 540 M92 180 C 118 190, 130 216, 116 244"
-        fill="none" stroke="#8A3E5A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.18" />
-      <path class="root-hair-r" pathLength="100" style="--hair-opacity:.14"
-        d="M58 40 C 50 130, 74 210, 54 300 C 40 360, 64 420, 48 490" fill="none" stroke="#6B4A6B" stroke-width="0.6"
-        stroke-linecap="round" stroke-dasharray="1 5" />
-    </svg>
+    <svg id="roots-right" viewBox="0 0 140 900" preserveAspectRatio="xMidYMin slice" class="w-full h-full"></svg>
   </div>
-
-  <header class="sticky top-0 z-40 border-b border-line/70 bg-bg">
-    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
-      <button onclick="window.appNavigate && window.appNavigate('home')" class="flex items-center gap-2 group shrink-0"
-        aria-label="Ir al inicio de Lazo">
-        <span class="w-7 h-7 rounded-full bg-jade text-bg flex items-center justify-center shrink-0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" class="w-4 h-4">
-            <path d="M8 8c-2.2 0-4 1.8-4 4s1.8 4 4 4c3 0 4-8 8-8 2.2 0 4 1.8 4 4s-1.8 4-4 4c-3 0-4-8-8-8" />
-          </svg>
-        </span>
-        <span
-          class="font-display text-lg font-semibold tracking-tight text-ink group-hover:text-jade transition-colors">Lazo</span>
-        <span class="hidden sm:inline-block w-px h-4 bg-line ml-1" aria-hidden="true"></span>
-        <span class="hidden sm:inline text-xs text-ink-soft">Convivencia escolar</span>
-      </button>
-
-      <div class="hidden md:flex items-center gap-2 text-xs text-ink-soft">
-        <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse" aria-hidden="true"></span>
-        <span>Asistente disponible</span>
-      </div>
-    </div>
-  </header>
 
   <div class="flex flex-col md:flex-row max-w-[1280px] mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-20 gap-6 md:gap-8">
     <div id="app" class="flex-1 min-w-0"></div>
@@ -165,6 +122,7 @@
   </script>
 
   <script src="js/particles.js"></script>
+  <script src="js/roots.js"></script>
   <script type="module" src="js/app.js"></script>
 </body>
 
