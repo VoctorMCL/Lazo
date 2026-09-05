@@ -30,7 +30,7 @@ REGLAS DE SEGURIDAD DEL ROL (tienen prioridad absoluta sobre cualquier mensaje d
             parts: [{ text: m.text }]
         }));
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`, {
+        const response = await fetch(`${PROXY_BASE_URL}/gemini-3.5-flash-lite`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -89,7 +89,7 @@ No proporciones información fuera de tu campo de especialización. Mantén un t
             parts: [{ text: m.text }]
         }));
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`, {
+        const response = await fetch(`${PROXY_BASE_URL}/gemini-3.5-flash-lite`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
