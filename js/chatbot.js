@@ -44,9 +44,7 @@ function renderChatbot() {
         : isError
           ? 'bg-alert-soft border border-alert/30 text-alert rounded-2xl rounded-tl-none'
           : 'bg-bg border border-line text-ink rounded-2xl rounded-tl-none'
-      } p-2.5 max-w-[88%] whitespace-pre-wrap">
-                ${esc(msg.text)}
-              </div>
+      } p-2.5 max-w-[88%] whitespace-pre-wrap">${esc(msg.text)}</div>
             </div>
           `;
   }).join('')}
