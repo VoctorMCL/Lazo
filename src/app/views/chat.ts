@@ -7,6 +7,7 @@ import { isAiError } from '../core/ai';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.html',
+  host: { class: 'flex flex-col flex-1 min-h-0' },
 })
 export class Chat {
   private readonly state = inject(AppState);
@@ -29,8 +30,8 @@ export class Chat {
     });
   }
 
-  backToList() {
-    this.state.navigate('list', { catId: this.scenario.catId });
+  goHome() {
+    this.state.navigate('home');
   }
 
   reset() {
