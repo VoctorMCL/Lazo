@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lazo</title>
+  <meta name="description"
+    content="Practica cómo manejar conflictos escolares conversando con un personaje y recibiendo retroalimentación desde diálogo, mediación y escucha activa." />
+  <base href="/" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    html {
+      background-color: #F5F1E4;
+      transition: background-color .3s ease;
+    }
+
+    html.dark {
+      background-color: #212824;
+      color-scheme: dark;
+    }
+  </style>
+  <script>
+    (function () {
+      var mode = null;
+      try { mode = localStorage.getItem("lazo:tema"); } catch (e) { }
+      if (mode !== "light" && mode !== "dark") {
+        mode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      if (mode === "dark") document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = mode;
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            bg: "rgb(var(--bg) / <alpha-value>)",
+            surface: "rgb(var(--surface) / <alpha-value>)",
+            ink: "rgb(var(--ink) / <alpha-value>)",
+            "ink-soft": "rgb(var(--ink-soft) / <alpha-value>)",
+            line: "rgb(var(--line) / <alpha-value>)",
+            scrim: "rgb(var(--scrim) / <alpha-value>)",
+
+            jade: "rgb(var(--jade) / <alpha-value>)", "jade-soft": "rgb(var(--jade-soft) / <alpha-value>)",
+            gold: "rgb(var(--gold) / <alpha-value>)", "gold-soft": "rgb(var(--gold-soft) / <alpha-value>)",
+            slate: "rgb(var(--slate) / <alpha-value>)", "slate-soft": "rgb(var(--slate-soft) / <alpha-value>)",
+            moss: "rgb(var(--moss) / <alpha-value>)", "moss-soft": "rgb(var(--moss-soft) / <alpha-value>)",
+            teal: "rgb(var(--teal) / <alpha-value>)", "teal-soft": "rgb(var(--teal-soft) / <alpha-value>)",
+            indigo: "rgb(var(--indigo) / <alpha-value>)", "indigo-soft": "rgb(var(--indigo-soft) / <alpha-value>)",
+            plum: "rgb(var(--plum) / <alpha-value>)", "plum-soft": "rgb(var(--plum-soft) / <alpha-value>)",
+            clay: "rgb(var(--clay) / <alpha-value>)", "clay-soft": "rgb(var(--clay-soft) / <alpha-value>)",
+            berry: "rgb(var(--berry) / <alpha-value>)", "berry-soft": "rgb(var(--berry-soft) / <alpha-value>)",
+            olive: "rgb(var(--olive) / <alpha-value>)", "olive-soft": "rgb(var(--olive-soft) / <alpha-value>)",
+            alert: "rgb(var(--alert) / <alpha-value>)", "alert-soft": "rgb(var(--alert-soft) / <alpha-value>)"
+          },
+          fontFamily: {
+            display: ["Fraunces", "Georgia", "serif"],
+            body: ["Inter", "-apple-system", "Segoe UI", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="text-ink font-body leading-[1.55] antialiased min-h-screen">
+  <app-root></app-root>
+</body>
+
+</html>

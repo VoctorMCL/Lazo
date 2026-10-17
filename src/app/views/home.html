@@ -1,0 +1,53 @@
+<header class="mb-10 sm:mb-12 relative">
+  <svg viewBox="0 0 600 90" preserveAspectRatio="none"
+       class="absolute -top-2 left-0 w-full h-16 sm:h-20 text-jade/25 -z-10" aria-hidden="true">
+    <path class="thread-draw" d="M0 60 C 100 10, 200 100, 300 55 C 400 15, 500 95, 600 45"
+          fill="none" stroke="currentColor" stroke-width="2.5" pathLength="220"/>
+  </svg>
+  <p class="text-sm text-ink-soft mb-2">Un espacio para practicar antes de la conversación real</p>
+  <h1 class="font-display text-4xl sm:text-[3.25rem] leading-[1.05] font-semibold tracking-tight text-ink max-w-xl">
+    Lazo
+  </h1>
+  <p class="max-w-md text-ink-soft text-base sm:text-lg mt-3">
+    Conversa con un personaje, aplica escucha activa y mediación, y recibe retroalimentación sobre cómo manejaste la situación.
+  </p>
+</header>
+
+<section class="bg-surface border border-line rounded-2xl p-5 mb-8 flex items-center gap-5">
+  <div class="relative w-16 h-16 shrink-0" aria-hidden="true">
+    <svg viewBox="0 0 36 36" class="w-16 h-16 -rotate-90">
+      <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgb(var(--line))" stroke-width="3"/>
+      <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgb(var(--jade))" stroke-width="3"
+              stroke-linecap="round" stroke-dasharray="97.4" [attr.stroke-dashoffset]="97.4 - (97.4 * pct / 100)"/>
+    </svg>
+    <span class="absolute inset-0 flex items-center justify-center text-xs font-semibold text-ink">{{ pct }}%</span>
+  </div>
+  <div class="min-w-0">
+    <p class="text-sm font-semibold text-ink">Tu progreso</p>
+    <p class="text-sm text-ink-soft">{{ completedCount }} de {{ totalScenarios }} situaciones completadas</p>
+  </div>
+</section>
+
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  @for (cat of categories; track cat.id) {
+    <div (click)="open(cat.id)"
+         [style.--fold]="colorsOf(cat).hex"
+         class="fold-corner bg-surface border border-line hover:border-{{ colorsOf(cat).main }} p-5 rounded-2xl rounded-tr-none cursor-pointer transition-colors hover:shadow-md flex flex-col justify-between group">
+      <div class="flex items-start gap-3.5">
+        <span class="w-10 h-10 rounded-xl bg-{{ colorsOf(cat).soft }} text-{{ colorsOf(cat).main }} flex items-center justify-center shrink-0">
+          <app-icon [name]="cat.id" extraClass="w-5 h-5" />
+        </span>
+        <div class="min-w-0 pt-0.5">
+          <h2 class="font-display text-lg font-medium text-ink leading-snug">
+            {{ cat.label }}
+          </h2>
+          <p class="text-xs text-ink-soft mt-0.5">{{ countOf(cat.id) }} situaciones</p>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between text-xs">
+        <span class="text-ink-soft">{{ completedOf(cat.id) }}/{{ countOf(cat.id) }} completados</span>
+        <span class="font-medium text-{{ colorsOf(cat).main }} opacity-0 group-hover:opacity-100 transition-opacity">Explorar</span>
+      </div>
+    </div>
+  }
+</section>

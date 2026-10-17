@@ -1,0 +1,96 @@
+<div class="mb-4 flex items-center justify-between gap-3">
+  <button (click)="backToList()"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-jade transition-colors shrink-0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M15 18l-6-6 6-6"/></svg>
+    Situaciones
+  </button>
+  <span class="text-xs text-ink-soft bg-surface border border-line px-3 py-1.5 rounded-full font-medium text-right line-clamp-1">
+    🎯 {{ scenario.objetivo }}
+  </span>
+</div>
+
+<div class="bg-surface border border-line rounded-2xl p-4 mb-4 flex items-center justify-between gap-3">
+  <div class="flex items-center gap-3 min-w-0">
+    <span class="w-11 h-11 rounded-full bg-{{ colors.soft }} text-{{ colors.main }} flex items-center justify-center font-display font-semibold text-lg shrink-0">
+      {{ scenario.personaje.charAt(0) }}
+    </span>
+    <div class="min-w-0">
+      <h1 class="font-display text-lg font-semibold text-ink leading-tight truncate">{{ scenario.title }}</h1>
+      <p class="text-xs text-ink-soft mt-0.5">Con <strong class="text-ink font-medium">{{ scenario.personaje }}</strong> · {{ scenario.personajeEstado }}</p>
+    </div>
+  </div>
+  <button (click)="reset()"
+          class="text-xs text-alert bg-alert-soft px-3 py-1.5 rounded-lg font-medium hover:opacity-80 shrink-0">
+    Reiniciar
+  </button>
+</div>
+
+<div #chatContainer id="chat-container" class="bg-surface border border-line rounded-2xl p-4 sm:p-6 mb-4 h-[55vh] sm:h-[50vh] overflow-y-auto flex flex-col gap-4">
+  <div class="text-center my-1">
+    <span class="text-xs bg-bg text-ink-soft px-3 py-1 rounded-full border border-line">
+      Inicio de la conversación con {{ scenario.personaje }}
+    </span>
+  </div>
+
+  @for (msg of messages; track $index) {
+    @if (msg.sender === 'character') {
+      <div class="flex items-start gap-3 max-w-[92%] sm:max-w-[85%] msg-in" [class.animate-shake]="isError(msg.text)">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-xs shrink-0"
+             [class.bg-alert-soft]="isError(msg.text)" [class.text-alert]="isError(msg.text)"
+             [class.bg-{{colors.soft}}]="!isError(msg.text)" [class.text-{{colors.main}}]="!isError(msg.text)">
+          {{ isError(msg.text) ? '!' : scenario.personaje.charAt(0) }}
+        </div>
+        <div class="p-3.5 rounded-2xl rounded-tl-none text-sm border"
+             [class.bg-alert-soft]="isError(msg.text)" [class.border-alert/30]="isError(msg.text)" [class.text-alert]="isError(msg.text)"
+             [class.bg-bg]="!isError(msg.text)" [class.border-line]="!isError(msg.text)" [class.text-ink]="!isError(msg.text)">
+          <p class="font-semibold text-xs mb-1"
+             [class.text-alert]="isError(msg.text)" [class.text-{{colors.main}}]="!isError(msg.text)">
+             {{ isError(msg.text) ? 'Error' : scenario.personaje }}
+          </p>
+          <p class="whitespace-pre-wrap">{{ msg.text }}</p>
+        </div>
+      </div>
+    } @else if (msg.sender === 'user') {
+      <div class="flex items-start gap-3 max-w-[92%] sm:max-w-[85%] ml-auto flex-row-reverse msg-in">
+        <div class="w-8 h-8 rounded-full bg-ink text-bg flex items-center justify-center font-semibold text-xs shrink-0">
+          Tú
+        </div>
+        <div class="bg-jade text-bg p-3.5 rounded-2xl rounded-tr-none text-sm">
+          <p class="whitespace-pre-wrap">{{ msg.text }}</p>
+        </div>
+      </div>
+    } @else if (msg.sender === 'feedback') {
+      <div class="w-full bg-jade-soft border border-jade/25 p-4 rounded-xl my-1 msg-in flex gap-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-jade shrink-0 mt-0.5">
+          <path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/>
+        </svg>
+        <div class="min-w-0">
+          <p class="font-semibold text-xs text-jade uppercase tracking-wide mb-1">Retroalimentación</p>
+          <p class="text-ink text-sm whitespace-pre-wrap">{{ msg.text }}</p>
+        </div>
+      </div>
+    }
+  }
+
+  @if (isGenerating) {
+    <div class="flex items-center gap-2 text-ink-soft text-xs italic pl-1">
+      <span class="dot-bounce w-1.5 h-1.5 rounded-full bg-{{ colors.main }}" style="animation-delay:0ms"></span>
+      <span class="dot-bounce w-1.5 h-1.5 rounded-full bg-{{ colors.main }}" style="animation-delay:150ms"></span>
+      <span class="dot-bounce w-1.5 h-1.5 rounded-full bg-{{ colors.main }}" style="animation-delay:300ms"></span>
+      {{ scenario.personaje }} está escribiendo
+    </div>
+  }
+</div>
+
+<div class="bg-surface border border-line rounded-2xl p-3 flex gap-2 items-end focus-within:ring-2 focus-within:ring-jade/25 focus-within:border-jade transition-shadow">
+  <textarea #chatInput rows="2"
+            [attr.placeholder]="'Escribe lo que le dirías a ' + scenario.personaje + '...'"
+            [disabled]="isGenerating"
+            class="w-full bg-bg border border-line rounded-xl p-3 text-sm text-ink focus:outline-none focus:border-jade resize-none disabled:opacity-60"
+            (keydown)="onKeydown($event, chatInput)"></textarea>
+  <button (click)="send(chatInput)" [disabled]="isGenerating"
+          class="bg-jade text-bg px-5 py-3 rounded-xl font-medium text-sm hover:opacity-90 disabled:opacity-50 shrink-0 h-full flex items-center justify-center gap-1.5">
+    Enviar
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+  </button>
+</div>
