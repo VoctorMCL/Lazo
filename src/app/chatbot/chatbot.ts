@@ -11,7 +11,7 @@ interface ChatMsg { sender: 'bot' | 'user'; text: string; }
 export class Chatbot {
   private readonly state = inject(AppState);
   protected readonly messages = signal<ChatMsg[]>([
-    { sender: 'bot', text: '¡Hola! Soy tu asistente de convivencia. Pregúntame sobre resolución de conflictos, comunicación, mediación o cualquier tema relacionado con la vida escolar.' }
+    { sender: 'bot', text: '¡Hola! Soy tu asistente de convivencia y bienestar. Pregúntame sobre conflictos, comunicación, mediación o cualquier situación personal que te esté afectando. Estoy aquí para escucharte y ayudarte a pensar en pasos seguros.' }
   ]);
   protected readonly isGenerating = signal(false);
   private readonly msgContainer = viewChild<ElementRef<HTMLDivElement>>('msgContainer');

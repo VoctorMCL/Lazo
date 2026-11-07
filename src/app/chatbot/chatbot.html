@@ -7,7 +7,7 @@
     </span>
     <div class="min-w-0">
       <h2 class="font-display text-base font-semibold text-ink leading-tight">Asistente</h2>
-      <p class="text-[11px] text-ink-soft leading-tight">Convivencia escolar</p>
+      <p class="text-[11px] text-ink-soft leading-tight">Convivencia y bienestar</p>
     </div>
     <button (click)="close()" aria-label="Cerrar"
             class="md:hidden ml-auto w-8 h-8 rounded-full flex items-center justify-center text-ink-soft hover:bg-bg shrink-0">
@@ -44,7 +44,7 @@
   </div>
 
   <div class="flex gap-2 items-end pt-1">
-    <input #chatbotInput type="text" placeholder="Pregunta algo..." [disabled]="isGenerating()"
+    <input #chatbotInput type="text" placeholder="Cuéntame qué pasa..." [disabled]="isGenerating()"
            class="flex-1 bg-bg border border-line rounded-xl p-2.5 text-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 disabled:opacity-60"
            (keydown)="onKeydown($event, chatbotInput)">
     <button (click)="send(chatbotInput)" [disabled]="isGenerating()"
