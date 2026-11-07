@@ -25,9 +25,8 @@
     [class.opacity-0]="!state.drawerOpen()" [class.pointer-events-none]="!state.drawerOpen()"></div>
 
   <aside id="chatbot-sidebar" class="fixed md:static inset-y-0 right-0 z-50 shrink-0
-                  w-[86vw] max-w-sm md:max-w-none md:w-[300px]
-                  md:translate-x-0"
-    [class.translate-x-full]="!state.drawerOpen()">
+                  w-[86vw] max-w-sm md:max-w-none md:w-[300px]"
+    [class.is-open]="state.drawerOpen()">
     <app-chatbot />
   </aside>
 
