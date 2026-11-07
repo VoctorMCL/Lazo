@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, viewChild, afterRenderEffect } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild, afterRenderEffect } from '@angular/core';
 import { AppState } from '../core/app-state';
 import { Simulator } from '../core/simulator';
 import { ProgressService } from '../core/progress';
@@ -17,6 +17,7 @@ export class Chat {
   private readonly chatContainer = viewChild<ElementRef<HTMLDivElement>>('chatContainer');
 
   protected readonly isError = isAiError;
+  protected readonly contextOpen = signal(true);
 
   get scenario() { return this.sim.currentScenario(); }
   get messages() { return this.sim.chatMessages(); }
@@ -36,6 +37,10 @@ export class Chat {
 
   goHome() {
     this.state.navigate('home');
+  }
+
+  toggleContext() {
+    this.contextOpen.update((open) => !open);
   }
 
   repeatScenario() {

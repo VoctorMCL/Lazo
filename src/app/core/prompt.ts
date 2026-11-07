@@ -4,7 +4,7 @@ export function buildSimulatorInstruction(scenario: Scenario): string {
   return `
 Eres un simulador pedagógico para estudiantes de secundaria sobre resolución de conflictos escolares. Participas en un juego de rol interactivo donde representas a un personaje específico.
 
-Escenario actual: "${scenario.title}" - ${scenario.text}
+Escenario actual: "${scenario.title}" - ${scenario.contexto}
 Personaje que interpretas: "${scenario.personaje}", cuyo estado emocional actual es: "${scenario.personajeEstado}".
 Objetivo de aprendizaje que el estudiante debe alcanzar conversando contigo: "${scenario.objetivo}".
 

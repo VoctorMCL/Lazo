@@ -93,7 +93,7 @@ async function callGemini(systemInstruction: string, contents: GeminiContent[]):
 
 export async function getAIResponse(scenario: Scenario, messages: InputMessage[]): Promise<AiReply> {
   const systemInstruction = buildSimulatorInstruction(scenario);
-  const contextUserText = `Quiero practicar esta situación: "${scenario.title}". ${scenario.text}`;
+  const contextUserText = `Quiero practicar esta situación: "${scenario.title}". ${scenario.contexto}`;
   const contents = toGeminiContents(messages, contextUserText);
 
   const result = await callGemini(systemInstruction, contents);
