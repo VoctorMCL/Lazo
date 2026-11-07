@@ -36,4 +36,13 @@ export class List {
   completed(scId: string) {
     return this.progressSvc.isCompleted(scId);
   }
+
+  repeatScenario(scId: string) {
+    const confirmed = window.confirm(
+      '¿Deseas repetir esta situación? Se reiniciará el diálogo y la retroalimentación de esta situación para que puedas practicar de nuevo.'
+    );
+    if (!confirmed) return;
+    this.progressSvc.resetScenario(scId);
+    this.state.navigate('chat', { scenarioId: scId });
+  }
 }

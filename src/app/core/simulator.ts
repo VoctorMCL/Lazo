@@ -1,12 +1,9 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { SCENARIOS } from './data';
 import { getAIResponse } from './ai';
-import { ProgressService } from './progress';
+import { ProgressService, ChatMessage } from './progress';
 
-export interface ChatMessage {
-  sender: 'character' | 'user' | 'feedback';
-  text: string;
-}
+export type { ChatMessage } from './progress';
 
 const MIN_USER_TURNS_FOR_FEEDBACK = 3;
 
@@ -23,12 +20,30 @@ export class Simulator {
     () => this.chatMessages().filter((m) => m.sender === 'user').length
   );
 
-  init(scenarioId: string) {
+  init(scenarioId: string, forceFresh = false) {
     const scenario = SCENARIOS.find((s) => s.id === scenarioId) ?? SCENARIOS[0];
     this.currentScenario.set(scenario);
-    this.chatMessages.set([{ sender: 'character', text: scenario.apertura }]);
     this.isGenerating.set(false);
-    this.feedbackGiven.set(false);
+
+    const saved = !forceFresh ? this.progressSvc.getScenarioProgress(scenario.id) : undefined;
+    if (saved?.completed) {
+      if (saved.messages && saved.messages.length > 0) {
+        this.chatMessages.set([...saved.messages]);
+        this.feedbackGiven.set(true);
+      } else if (saved.feedback) {
+        this.chatMessages.set([
+          { sender: 'character', text: scenario.apertura },
+          { sender: 'feedback', text: saved.feedback },
+        ]);
+        this.feedbackGiven.set(true);
+      } else {
+        this.chatMessages.set([{ sender: 'character', text: scenario.apertura }]);
+        this.feedbackGiven.set(false);
+      }
+    } else {
+      this.chatMessages.set([{ sender: 'character', text: scenario.apertura }]);
+      this.feedbackGiven.set(false);
+    }
   }
 
   async send(text: string) {
@@ -54,17 +69,24 @@ export class Simulator {
     if (readyForFeedback && responseData.feedback) {
       const feedback = responseData.feedback;
       this.feedbackGiven.set(true);
-      this.chatMessages.update((messages) => [
-        ...messages,
+      const updatedMessages: ChatMessage[] = [
+        ...this.chatMessages(),
         { sender: 'feedback', text: feedback },
-      ]);
-      this.progressSvc.complete(scenario.id);
+      ];
+      this.chatMessages.set(updatedMessages);
+      this.progressSvc.complete(scenario.id, feedback, updatedMessages);
     }
 
     this.isGenerating.set(false);
   }
 
+  repeatCurrentScenario() {
+    const id = this.currentScenario().id;
+    this.progressSvc.resetScenario(id);
+    this.init(id, true);
+  }
+
   reset() {
-    this.init(this.currentScenario().id);
+    this.init(this.currentScenario().id, true);
   }
 }
